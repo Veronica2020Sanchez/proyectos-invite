@@ -1,83 +1,325 @@
 <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Correo de Solicitud</title>
-          <style>body{font-size:13px;} tbody{font-size:11px;} </style>
-        </head>
-        <body style="background-color: #f4f4f9; font-family: Arial, sans-serif; margin: 0; padding: 0;">
-          <table style="width: 100%; max-width: 600px; margin: auto; background-color: #ffffff; border-collapse: collapse;">
-            <tr>
-              <td style="background-color: #003366; color: #ffffff; padding: 15px; text-align: center;">
-                <img src="https://aplicaciones.beagle.com.pe/images/LogoBeagle.png" alt="Beagle Logo" style="max-width: 150px; height: auto;">
-                <h2 style="margin: 0; font-size: 1.5rem; font-family: Arial, sans-serif;">Solicitud de Servicio Integral ${textotitle}</h2>
-              </td>
-            </tr>
-            <tr>
-              <td style="background-color: #cb121a; height: 6px;"></td>
-            </tr>
-            <tr>
-              <td style="padding: 20px; font-size: 1rem; line-height: 1.5; color: #333333;">
-                <p style="font-family: Arial, sans-serif;">Se ha ${textobody} una solicitud de servicio integral para el cliente <b>${cliente}</b> :</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-              <center>
-                <table border='1' style="width: 80%; height:45px; border: 1px rgb(210, 207, 207); border-collapse: collapse; font-size: 1rem;">
-                 
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Cod solicitud</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].id_servicio}</td>
-                    </tr>
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Ord Compra</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].nro_ord_comp}</td>
-                    </tr>
-                     <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Régimen</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].cod_regi} - ${datosOC[0].NOMREGIMEN}</td>
-                   </tr>
-                   <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Proveedor</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].nom_proveedor}</td>
-                   </tr>
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Vía</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${limpiarNull(datosOC[0].nomvia)}</td>
-                    </tr>
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Dir. Entrega</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].direntrega}</td>
-                    </tr>
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Incoterms</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].cod_incoterms}</td>
-                    </tr>
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Fec. Est. Entrega</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].fec_est_entrega}</td>
-                    </tr>
-                    <tr>
-                      <td style="font-size: 1.5rem; background-color: #003366; color: #ffffff; font-family: Arial, sans-serif; text-align: center; height:30px;"><b>Forma de pago</b></td>
-                      <td style="font-size: 1.5rem; background-color: #ffffff; color: #000000; font-family: Arial, sans-serif; text-align: center;">${datosOC[0].formapago}</td>
-                   </tr>
-                  
-                </table >
-                </center>
-              </td >
-            </tr >
-            <tr>
-              <td style="padding: 20px; font-size: 1rem; line-height: 1.5; color: #333333;">
-                <p style="font-family: Arial, sans-serif;">Puede consultar la Orden de compra a traves del siguiente link <a href='http://172.16.104.23/beaglenet2/'>http://app.beagle.com.pe</a></p>
-              </td>
-            </tr>
-        <tr>
-          <td style="text-align: center; font-family: Arial, sans-serif; font-size: 0.75rem; color: #ffffff; background-color: #3b3b3b; padding: 10px;">
-            &copy; 2025 Beagle Agentes de Aduana. Todos los derechos reservados.
-          </td>
-        </tr>
-          </table >
-        </body >
-      </html > 
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Una idea tranquila</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --negro:#080808;
+  --negro-card:#0e0e0e;
+  --vino:#7a0c0c;
+  --vino-oscuro:#4a0e0e;
+  --borgona:#8b1a1a;
+  --texto:#f0f0f0;
+  --texto-suave:#cfcfcf;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow-x:hidden;
+}
+
+body{
+  font-family:'Inter',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(circle at top left, rgba(122,12,12,.6), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(139,26,26,.5), transparent 60%),
+    linear-gradient(135deg, var(--vino-oscuro), var(--negro));
+}
+
+.app{
+  position:relative;
+  width:100%;
+  height:100svh;
+  overflow:hidden;
+}
+
+/* TARJETAS */
+.card{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at top, rgba(122,12,12,.35), transparent 60%),
+    linear-gradient(160deg, #141414, var(--negro-card));
+  border-radius:26px;
+  padding:28px 22px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  box-shadow:
+    0 40px 90px rgba(0,0,0,.8),
+    0 0 40px rgba(122,12,12,.35),
+    inset 0 0 60px rgba(122,12,12,.35);
+
+  opacity:0;
+  transform:translate3d(80px,0,0) scale(.96);
+  transition:transform .6s cubic-bezier(.22,1,.36,1),
+             opacity .4s ease;
+}
+
+.card.active{
+  opacity:1;
+  transform:translate3d(0,0,0) scale(1);
+  z-index:10;
+}
+
+.card.back{
+  transform:translate3d(-80px,0,0) scale(.96);
+}
+
+h1{
+  font-weight:400;
+  font-size:1.9rem;
+  margin-bottom:22px;
+}
+
+p{
+  font-size:1rem;
+  line-height:1.65;
+  color:var(--texto-suave);
+  max-width:280px;
+}
+
+/* DESTACADO */
+.highlight{
+  background:linear-gradient(135deg, var(--borgona), var(--vino));
+  padding:22px;
+  border-radius:20px;
+  color:#fff;
+  box-shadow:0 25px 60px rgba(122,12,12,.7);
+}
+
+/* BOTONES RESPUESTA */
+.response{
+  margin-top:22px;
+  display:flex;
+  gap:16px;
+}
+
+.btn{
+  border:none;
+  border-radius:999px;
+  padding:12px 22px;
+  font-size:.9rem;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+.btn-si{
+  background:linear-gradient(135deg,var(--borgona),var(--vino));
+  color:white;
+  transform:scale(1);
+}
+
+.btn-no{
+  background:rgba(255,255,255,.1);
+  color:#ddd;
+  transform:scale(1);
+}
+
+.btn-si.grow{
+  transform:scale(1.2);
+}
+
+.btn-no.shrink{
+  transform:scale(.75);
+  opacity:.6;
+}
+
+/* NAVEGACIÓN */
+.nav{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  background:rgba(122,12,12,.25);
+  backdrop-filter:blur(10px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:20px;
+  color:#fff;
+  cursor:pointer;
+  opacity:.35;
+  transition:.3s;
+  z-index:20;
+}
+
+.nav:hover{opacity:.9}
+.prev{left:6px}
+.next{right:6px}
+
+/* DOTS */
+.dots{
+  position:absolute;
+  bottom:14px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#333;
+}
+
+.dot.active{
+  background:var(--borgona);
+  box-shadow:0 0 12px var(--borgona);
+}
+</style>
+</head>
+
+<body>
+
+<div class="app" id="app">
+
+  <div class="card active">
+    <h1>Una idea tranquila</h1>
+    <p>Hola Fer 🙂<br>Se me ocurrió algo y quise dejártelo por aquí.</p>
+  </div>
+
+  <div class="card">
+    <p>
+      Hay planes que se sienten bien<br>
+      sin necesidad de hacerlos grandes,<br>
+      y a veces basta con cambiar de escenario<br>
+      para que la tarde se sienta distinta.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="highlight">
+      Este sábado,<br>
+      Mall Plaza Bellavista,<br>
+      5 de la tarde,<br>
+      para ver a Gabriela un rato.
+    </div>
+  </div>
+
+  <div class="card">
+    <p>
+      Un plan sencillo:<br>
+      caminar, escuchar música<br>
+      y distraernos un poco.
+    </p>
+  </div>
+
+  <div class="card">
+    <p>
+      A veces el plan funciona<br>
+      por quien está ahí,<br>
+      no por lo que se hace.
+    </p>
+  </div>
+
+  <div class="card">
+    <p>
+      Y si aparece alguna risa,<br>
+      suma.<br><br>
+      Con risa de por medio,<br>
+      mejor.
+    </p>
+  </div>
+
+  <!-- TARJETA FINAL -->
+  <div class="card">
+    <p style="margin-bottom:10px">¿Aceptas?</p>
+
+    <div class="response">
+      <button class="btn btn-no" id="btnNo">No</button>
+      <button class="btn btn-si" id="btnSi">Sí</button>
+    </div>
+  </div>
+
+  <div class="nav prev">‹</div>
+  <div class="nav next">›</div>
+</div>
+
+<div class="dots">
+  <div class="dot active"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<script>
+const cards=[...document.querySelectorAll('.card')];
+const dots=[...document.querySelectorAll('.dot')];
+let index=0;
+
+function show(i,back=false){
+  cards.forEach(c=>c.classList.remove('active','back'));
+  if(back) cards[index].classList.add('back');
+  index=i;
+  cards[index].classList.add('active');
+  dots.forEach(d=>d.classList.remove('active'));
+  dots[index].classList.add('active');
+}
+
+document.querySelector('.next').onclick=()=>{ if(index<cards.length-1) show(index+1); };
+document.querySelector('.prev').onclick=()=>{ if(index>0) show(index-1,true); };
+
+/* SWIPE */
+let startX=0;
+const app=document.getElementById('app');
+app.addEventListener('touchstart',e=>{ startX=e.touches[0].clientX; },{passive:true});
+app.addEventListener('touchend',e=>{
+  const diff=e.changedTouches[0].clientX-startX;
+  if(diff<-50 && index<cards.length-1) show(index+1);
+  if(diff>50 && index>0) show(index-1,true);
+});
+
+/* BOTONES */
+const btnNo = document.getElementById('btnNo');
+const btnSi = document.getElementById('btnSi');
+
+let scaleNo = 1;
+let scaleSi = 1;
+
+btnNo.onclick = () => {
+  // reducir NO
+  scaleNo -= 0.12;
+  if (scaleNo < 0.4) scaleNo = 0.4;
+
+  // agrandar SÍ
+  scaleSi += 0.12;
+  if (scaleSi > 1.6) scaleSi = 1.6;
+
+  btnNo.style.transform = `scale(${scaleNo})`;
+  btnNo.style.opacity = scaleNo;
+
+  btnSi.style.transform = `scale(${scaleSi})`;
+};
+
+btnSi.onclick = () => {
+  const msg = encodeURIComponent("Holaaaaaa!!! sí acepto");
+  window.location.href = `https://wa.me/51960879739?text=${msg}`;
+};
+
+</script>
+
+</body>
+</html>
