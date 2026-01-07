@@ -9,13 +9,8 @@
 
 <style>
 :root{
-  --negro:#080808;
-  --negro-card:#0e0e0e;
-  --vino:#7a0c0c;
-  --vino-oscuro:#4a0e0e;
-  --borgona:#8b1a1a;
   --texto:#f0f0f0;
-  --texto-suave:#cfcfcf;
+  --texto-suave:#e0e0e0;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -23,7 +18,7 @@
 html,body{
   width:100%;
   height:100%;
-  overflow-x:hidden;
+  overflow:hidden;
 }
 
 body{
@@ -31,10 +26,7 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  background:
-    radial-gradient(circle at top left, rgba(122,12,12,.6), transparent 60%),
-    radial-gradient(circle at bottom right, rgba(139,26,26,.5), transparent 60%),
-    linear-gradient(135deg, var(--vino-oscuro), var(--negro));
+  background:#000;
 }
 
 .app{
@@ -44,14 +36,45 @@ body{
   overflow:hidden;
 }
 
+/* FONDO BORROSO */
+.app::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.85)),
+    url("img/michael.jpg");
+  background-size:cover;
+  background-position:center;
+  filter:blur(1px);
+  transform:scale(1.06);
+  z-index:0;
+}
+
+/* FONDO NÍTIDO (OCULTO POR DEFECTO) */
+.app::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.6)),
+    url("img/michael.jpg");
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity .6s ease;
+  z-index:1;
+}
+
+/* ACTIVAR FONDO NÍTIDO EN LA ÚLTIMA */
+.app.final::after{
+  opacity:1;
+}
+
 /* TARJETAS */
 .card{
   position:absolute;
   inset:0;
-  background:
-    radial-gradient(circle at top, rgba(122,12,12,.35), transparent 60%),
-    linear-gradient(160deg, #141414, var(--negro-card));
-  border-radius:26px;
   padding:28px 22px;
 
   display:flex;
@@ -60,31 +83,30 @@ body{
   align-items:center;
   text-align:center;
 
-  box-shadow:
-    0 40px 90px rgba(0,0,0,.8),
-    0 0 40px rgba(122,12,12,.35),
-    inset 0 0 60px rgba(122,12,12,.35);
+  background:rgba(0,0,0,.55);
+  border-radius:26px;
+
+  box-shadow:0 40px 90px rgba(0,0,0,.85);
 
   opacity:0;
   transform:translate3d(80px,0,0) scale(.96);
   transition:transform .6s cubic-bezier(.22,1,.36,1),
              opacity .4s ease;
+  z-index:2;
 }
 
 .card.active{
   opacity:1;
   transform:translate3d(0,0,0) scale(1);
-  z-index:10;
 }
 
 .card.back{
   transform:translate3d(-80px,0,0) scale(.96);
 }
 
-h1{
-  font-weight:400;
-  font-size:1.9rem;
-  margin-bottom:22px;
+/* TARJETA FINAL MÁS TRANSPARENTE */
+.card.final{
+  background:rgba(0,0,0,.25);
 }
 
 p{
@@ -96,14 +118,14 @@ p{
 
 /* DESTACADO */
 .highlight{
-  background:linear-gradient(135deg, var(--borgona), var(--vino));
+  background:rgba(0,0,0,.65);
   padding:22px;
   border-radius:20px;
   color:#fff;
-  box-shadow:0 25px 60px rgba(122,12,12,.7);
+  box-shadow:0 25px 60px rgba(0,0,0,.8);
 }
 
-/* BOTONES RESPUESTA */
+/* BOTONES */
 .response{
   margin-top:22px;
   display:flex;
@@ -116,28 +138,17 @@ p{
   padding:12px 22px;
   font-size:.9rem;
   cursor:pointer;
-  transition:all .3s ease;
+  transition:.3s;
 }
 
 .btn-si{
-  background:linear-gradient(135deg,var(--borgona),var(--vino));
-  color:white;
-  transform:scale(1);
+  background:#fff;
+  color:#000;
 }
 
 .btn-no{
-  background:rgba(255,255,255,.1);
-  color:#ddd;
-  transform:scale(1);
-}
-
-.btn-si.grow{
-  transform:scale(1.2);
-}
-
-.btn-no.shrink{
-  transform:scale(.75);
-  opacity:.6;
+  background:rgba(255,255,255,.15);
+  color:#fff;
 }
 
 /* NAVEGACIÓN */
@@ -148,17 +159,16 @@ p{
   width:44px;
   height:44px;
   border-radius:50%;
-  background:rgba(122,12,12,.25);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,.4);
   display:flex;
   justify-content:center;
   align-items:center;
   font-size:20px;
   color:#fff;
   cursor:pointer;
-  opacity:.35;
+  opacity:.4;
   transition:.3s;
-  z-index:20;
+  z-index:5;
 }
 
 .nav:hover{opacity:.9}
@@ -173,18 +183,19 @@ p{
   display:flex;
   justify-content:center;
   gap:10px;
+  z-index:5;
 }
 
 .dot{
   width:8px;
   height:8px;
   border-radius:50%;
-  background:#333;
+  background:#555;
 }
 
 .dot.active{
-  background:var(--borgona);
-  box-shadow:0 0 12px var(--borgona);
+  background:#fff;
+  box-shadow:0 0 12px #fff;
 }
 </style>
 </head>
@@ -258,61 +269,79 @@ p{
   <div class="dot"></div>
 </div>
 
-<script>
-const cards=[...document.querySelectorAll('.card')];
-const dots=[...document.querySelectorAll('.dot')];
-let index=0;
+<audio id="bgMusic" loop>
+  <source src="audio/michael.mp3" type="audio/mpeg">
+</audio>
 
-function show(i,back=false){
-  cards.forEach(c=>c.classList.remove('active','back'));
-  if(back) cards[index].classList.add('back');
-  index=i;
+<script>
+const cards = [...document.querySelectorAll('.card')];
+const dots = [...document.querySelectorAll('.dot')];
+const app = document.getElementById('app');
+const music = document.getElementById('bgMusic');
+
+let index = 0;
+let musicStarted = false;
+
+// Reproduce la música solo una vez
+function startMusicOnce() {
+  if (!musicStarted && music) {
+    music.volume = 0.5;
+    music.play().catch(() => {});
+    musicStarted = true;
+  }
+}
+
+// Función para mostrar la tarjeta
+function show(i) {
+  if (i < 0 || i >= cards.length) return; // evita índices fuera de rango
+
+  startMusicOnce();
+
+  cards.forEach((c, idx) => {
+    c.classList.remove('active', 'back');
+    if (idx < i) c.classList.add('back'); // tarjetas anteriores
+  });
+
+  index = i;
   cards[index].classList.add('active');
-  dots.forEach(d=>d.classList.remove('active'));
+
+  // Fondo nítido si estamos en la última tarjeta
+  app.classList.toggle('final', index === cards.length - 1);
+
+  // Actualizar dots
+  dots.forEach(d => d.classList.remove('active'));
   dots[index].classList.add('active');
 }
 
-document.querySelector('.next').onclick=()=>{ if(index<cards.length-1) show(index+1); };
-document.querySelector('.prev').onclick=()=>{ if(index>0) show(index-1,true); };
+// Botones de navegación
+document.querySelector('.next').onclick = () => show(index + 1);
+document.querySelector('.prev').onclick = () => show(index - 1);
 
-/* SWIPE */
-let startX=0;
-const app=document.getElementById('app');
-app.addEventListener('touchstart',e=>{ startX=e.touches[0].clientX; },{passive:true});
-app.addEventListener('touchend',e=>{
-  const diff=e.changedTouches[0].clientX-startX;
-  if(diff<-50 && index<cards.length-1) show(index+1);
-  if(diff>50 && index>0) show(index-1,true);
+// Swipe en móviles
+let startX = 0;
+app.addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+}, { passive: true });
+
+app.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].clientX - startX;
+  if (diff < -50) show(index + 1); // swipe izquierda
+  if (diff > 50) show(index - 1);  // swipe derecha
 });
 
-/* BOTONES */
-const btnNo = document.getElementById('btnNo');
-const btnSi = document.getElementById('btnSi');
-
-let scaleNo = 1;
-let scaleSi = 1;
-
-btnNo.onclick = () => {
-  // reducir NO
-  scaleNo -= 0.12;
-  if (scaleNo < 0.4) scaleNo = 0.4;
-
-  // agrandar SÍ
-  scaleSi += 0.12;
-  if (scaleSi > 1.6) scaleSi = 1.6;
-
-  btnNo.style.transform = `scale(${scaleNo})`;
-  btnNo.style.opacity = scaleNo;
-
-  btnSi.style.transform = `scale(${scaleSi})`;
-};
-
-btnSi.onclick = () => {
+// Botones de respuesta en la última tarjeta
+document.getElementById('btnSi').onclick = () => {
   const msg = encodeURIComponent("Holaaaaaa!!! sí acepto");
   window.location.href = `https://wa.me/51960879739?text=${msg}`;
 };
 
+document.getElementById('btnNo').onclick = () => {
+  const msg = encodeURIComponent("Ohhh, no puedo :(");
+  window.location.href = `https://wa.me/51960879739?text=${msg}`;
+};
 </script>
+
+
 
 </body>
 </html>
